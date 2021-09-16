@@ -5,6 +5,7 @@ const scoreDisplay = document.querySelector('#score');
 const startBtn = document.querySelector('#start-button');
 const width = 10;
 
+// tetrominos figures
 const lTetromino = [
     [1, width + 1, width * 2 + 1, 2],
     [width, width + 1, width + 2, width * 2 + 2],
@@ -48,12 +49,14 @@ let currentRotation = 0;
 let random = Math.floor(Math.random() * theTetrominoes.length);
 let current = theTetrominoes[random][currentRotation];
 
+// draw tetrominos
 function draw() {
     current.forEach(index => {
         squares[currentPosition + index].classList.add('tetromino');
     })
 }
 
+// undraw tetrominos
 function undraw() {
     current.forEach(index => {
         squares[currentPosition + index].classList.remove('tetromino');
@@ -61,6 +64,20 @@ function undraw() {
 }
 timerId = setInterval(moveDown, 1000);
 
+// assign function to keyCodes
+function control(e) {
+    if (e.keyCode === 37) {
+        moveLeft();
+    } else if (e.keyCode === 38) {
+        rotate();
+    } else if (e.keyCode === 39) {
+        moveRight();
+    } else if (e.keyCode === 40) {
+        moveDown();
+    }
+}
+document.addEventListener('keyup', control)
+// make tetromino move down every second
 function moveDown() {
     undraw();
     currentPosition += width;
@@ -68,6 +85,7 @@ function moveDown() {
     freeze();
 }
 
+// freeze function
 function freeze() {
     if (current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
         current.forEach(index => squares[currentPosition + index].classList.add('taken'));
@@ -77,4 +95,27 @@ function freeze() {
         draw();
     }
 }
+
+// move left function
+function moveLeft() {
+    undraw();
+    const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0);
+    if (!isAtLeftEdge) currentPosition -= 1;
+    if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+        currentPosition += 1;
+    }
+    draw();
+}
+
+// move right function
+function moveRight() {
+    undraw();
+    const isAtRightEdge = current.some(index => (currentPosition + index) % width === width -1);
+    if (!isAtRightEdge) currentPosition +=1;
+    if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+        currentPosition -= 1;
+}
+draw();
+}
+
 })
