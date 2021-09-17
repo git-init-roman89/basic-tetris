@@ -1,17 +1,73 @@
+.container {
+  display: flex;
+}
 .grid {
-    width: 200px;
-    height: 400px;
-    background-color: yellow;
-    display: flex;
-    flex-wrap: wrap;
+  width: 200px;
+  height: 400px;
+  background-color: yellow;
+  display: flex;
+  flex-wrap: wrap;
 }
 .grid div {
-    height: 20px;
-    width: 20px;
+  height: 20px;
+  width: 20px;
 }
 .tetromino {
-    background: #3D94F6;
-    background-image: linear-gradient(top, #3D94F6, #1E62D0);
-    border-radius: 5px;
-    color: #FFFFFF;
+  background: #3d94f6;
+  background-image: linear-gradient(top, #3d94f6, #1e62d0);
+  border-radius: 5px;
+  color: #ffffff;
+}
+.mini-grid {
+  margin-left: 50px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: yellow;
+}
+.mini-grid div {
+  height: 20px;
+  width: 20px;
+}
+.startBtn {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+a {
+  display: block;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #333;
+  border: 2px solid #333;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all 0.35s;
+}
+a span {
+  position: relative;
+  z-index: 2;
+}
+a:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #ff003b;
+  transition: all 0.35s;
+}
+a:hover {
+  color: #fff;
+}
+a:hover:after {
+  width: 100%;
 }
